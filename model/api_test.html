@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Fare API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 10px 0; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { background: white; padding: 15px; border-radius: 4px; margin-top: 10px; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; }
+        input, select { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; }
+        .form-group { margin: 10px 0; }
+        label { display: block; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🚕 Taxi Fare Prediction API Test</h1>
+    
+    <div class="container">
+        <h2>1. Health Check</h2>
+        <button onclick="testHealthCheck()">Test Health Check</button>
+        <div id="healthResult" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="container">
+        <h2>2. Fare Prediction</h2>
+        <div class="form-group">
+            <label>Pickup Location ID:</label>
+            <input type="number" id="pickupLocation" value="161">
+        </div>
+        <div class="form-group">
+            <label>Dropoff Location ID:</label>
+            <input type="number" id="dropoffLocation" value="230">
+        </div>
+        <div class="form-group">
+            <label>Passenger Count:</label>
+            <input type="number" id="passengerCount" value="2" min="1" max="6">
+        </div>
+        <div class="form-group">
+            <label>Trip Distance (miles):</label>
+            <input type="number" id="tripDistance" value="5.5" step="0.1">
+        </div>
+        <div class="form-group">
+            <label>Pickup Hour (0-23):</label>
+            <input type="number" id="pickupHour" value="14" min="0" max="23">
+        </div>
+        <div class="form-group">
+            <label>Pickup Day:</label>
+            <select id="pickupDay">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday" selected>Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+        </div>
+        
+        <button onclick="predictFare()">Predict Fare</button>
+        <div id="predictionResult" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000';
+
+        async function testHealthCheck() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/`);
+                const data = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <h3>✅ Health Check Successful</h3>
+                    <p><strong>Status:</strong> ${data.status}</p>
+                    <p><strong>Message:</strong> ${data.message}</p>
+                    <p><strong>Model Loaded:</strong> ${data.model_loaded}</p>
+                    <p><strong>Scaler Loaded:</strong> ${data.scaler_loaded}</p>
+                `;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Health Check Failed</h3>
+                    <p>Error: ${error.message}</p>
+                    <p>Make sure the API server is running on port 5000</p>
+                `;
+            }
+        }
+
+        async function predictFare() {
+            const resultDiv = document.getElementById('predictionResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Predicting...';
+            
+            // Collect form data
+            const tripData = {
+                PULocationID: parseInt(document.getElementById('pickupLocation').value),
+                DOLocationID: parseInt(document.getElementById('dropoffLocation').value),
+                passenger_count: parseInt(document.getElementById('passengerCount').value),
+                trip_distance: parseFloat(document.getElementById('tripDistance').value),
+                extra: 0.5,
+                mta_tax: 0.5,
+                tip_amount: 3.0,
+                tolls_amount: 0.0,
+                total_amount: 25.0,
+                payment_type: 1,
+                trip_type: 1,
+                congestion_surcharge: 2.5,
+                cbd_congestion_fee: 0.75,
+                trip_duration_minutes: 22,
+                pickup_hour: parseInt(document.getElementById('pickupHour').value),
+                pickup_day: document.getElementById('pickupDay').value,
+                pickup_month: 1
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(tripData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>🎯 Prediction Successful</h3>
+                        <p><strong>Predicted Fare:</strong> $${data.predicted_fare}</p>
+                        <p><strong>Trip Details:</strong></p>
+                        <ul>
+                            <li>Distance: ${tripData.trip_distance} miles</li>
+                            <li>Passengers: ${tripData.passenger_count}</li>
+                            <li>Time: ${tripData.pickup_hour}:00 on ${tripData.pickup_day}</li>
+                        </ul>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <h3>❌ Prediction Failed</h3>
+                        <p>Error: ${data.message}</p>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Request Failed</h3>
+                    <p>Error: ${error.message}</p>
+                    <p>Make sure the API server is running and CORS is enabled</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
