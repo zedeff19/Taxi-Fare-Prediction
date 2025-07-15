@@ -1,72 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi Fare API Test</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .container { background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 10px 0; }
-        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        .result { background: white; padding: 15px; border-radius: 4px; margin-top: 10px; }
-        .error { background: #f8d7da; border: 1px solid #f5c6cb; }
-        .success { background: #d4edda; border: 1px solid #c3e6cb; }
-        input, select { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; }
-        .form-group { margin: 10px 0; }
-        label { display: block; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <h1>🚕 Taxi Fare Prediction API Test</h1>
-    
-    <div class="container">
-        <h2>1. Health Check</h2>
-        <button onclick="testHealthCheck()">Test Health Check</button>
-        <div id="healthResult" class="result" style="display: none;"></div>
-    </div>
-
-    <div class="container">
-        <h2>2. Fare Prediction</h2>
-        <div class="form-group">
-            <label>Pickup Location ID:</label>
-            <input type="number" id="pickupLocation" value="161">
-        </div>
-        <div class="form-group">
-            <label>Dropoff Location ID:</label>
-            <input type="number" id="dropoffLocation" value="230">
-        </div>
-        <div class="form-group">
-            <label>Passenger Count:</label>
-            <input type="number" id="passengerCount" value="2" min="1" max="6">
-        </div>
-        <div class="form-group">
-            <label>Trip Distance (miles):</label>
-            <input type="number" id="tripDistance" value="5.5" step="0.1">
-        </div>
-        <div class="form-group">
-            <label>Pickup Hour (0-23):</label>
-            <input type="number" id="pickupHour" value="14" min="0" max="23">
-        </div>
-        <div class="form-group">
-            <label>Pickup Day:</label>
-            <select id="pickupDay">
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday" selected>Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-            </select>
-        </div>
-        
-        <button onclick="predictFare()">Predict Fare</button>
-        <div id="predictionResult" class="result" style="display: none;"></div>
-    </div>
-
-    <script>
-        const API_BASE = 'http://localhost:5000';
+const API_BASE = 'http://localhost:5000';
 
         async function testHealthCheck() {
             const resultDiv = document.getElementById('healthResult');
@@ -160,6 +92,3 @@
                 `;
             }
         }
-    </script>
-</body>
-</html>
