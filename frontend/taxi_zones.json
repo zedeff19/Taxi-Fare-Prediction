@@ -1,0 +1,1861 @@
+{
+  "total_zones": 265,
+  "last_updated": "2025-07-22",
+  "zones": [
+    {
+      "id": 3,
+      "name": "Allerton/Pelham Gardens, Bronx",
+      "zone": "Allerton/Pelham Gardens",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 4,
+      "name": "Alphabet City, Manhattan",
+      "zone": "Alphabet City",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 5,
+      "name": "Arden Heights, Staten Island",
+      "zone": "Arden Heights",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 6,
+      "name": "Arrochar/Fort Wadsworth, Staten Island",
+      "zone": "Arrochar/Fort Wadsworth",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 8,
+      "name": "Astoria Park, Queens",
+      "zone": "Astoria Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 7,
+      "name": "Astoria, Queens",
+      "zone": "Astoria",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 9,
+      "name": "Auburndale, Queens",
+      "zone": "Auburndale",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 10,
+      "name": "Baisley Park, Queens",
+      "zone": "Baisley Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 11,
+      "name": "Bath Beach, Brooklyn",
+      "zone": "Bath Beach",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 13,
+      "name": "Battery Park City, Manhattan",
+      "zone": "Battery Park City",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 12,
+      "name": "Battery Park, Manhattan",
+      "zone": "Battery Park",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 14,
+      "name": "Bay Ridge, Brooklyn",
+      "zone": "Bay Ridge",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 15,
+      "name": "Bay Terrace/Fort Totten, Queens",
+      "zone": "Bay Terrace/Fort Totten",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 16,
+      "name": "Bayside, Queens",
+      "zone": "Bayside",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 18,
+      "name": "Bedford Park, Bronx",
+      "zone": "Bedford Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 17,
+      "name": "Bedford, Brooklyn",
+      "zone": "Bedford",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 19,
+      "name": "Bellerose, Queens",
+      "zone": "Bellerose",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 20,
+      "name": "Belmont, Bronx",
+      "zone": "Belmont",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 21,
+      "name": "Bensonhurst East, Brooklyn",
+      "zone": "Bensonhurst East",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 22,
+      "name": "Bensonhurst West, Brooklyn",
+      "zone": "Bensonhurst West",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 23,
+      "name": "Bloomfield/Emerson Hill, Staten Island",
+      "zone": "Bloomfield/Emerson Hill",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 24,
+      "name": "Bloomingdale, Manhattan",
+      "zone": "Bloomingdale",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 25,
+      "name": "Boerum Hill, Brooklyn",
+      "zone": "Boerum Hill",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 26,
+      "name": "Borough Park, Brooklyn",
+      "zone": "Borough Park",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 27,
+      "name": "Breezy Point/Fort Tilden/Riis Beach, Queens",
+      "zone": "Breezy Point/Fort Tilden/Riis Beach",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 28,
+      "name": "Briarwood/Jamaica Hills, Queens",
+      "zone": "Briarwood/Jamaica Hills",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 29,
+      "name": "Brighton Beach, Brooklyn",
+      "zone": "Brighton Beach",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 30,
+      "name": "Broad Channel, Queens",
+      "zone": "Broad Channel",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 31,
+      "name": "Bronx Park, Bronx",
+      "zone": "Bronx Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 32,
+      "name": "Bronxdale, Bronx",
+      "zone": "Bronxdale",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 33,
+      "name": "Brooklyn Heights, Brooklyn",
+      "zone": "Brooklyn Heights",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 34,
+      "name": "Brooklyn Navy Yard, Brooklyn",
+      "zone": "Brooklyn Navy Yard",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 35,
+      "name": "Brownsville, Brooklyn",
+      "zone": "Brownsville",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 36,
+      "name": "Bushwick North, Brooklyn",
+      "zone": "Bushwick North",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 37,
+      "name": "Bushwick South, Brooklyn",
+      "zone": "Bushwick South",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 38,
+      "name": "Cambria Heights, Queens",
+      "zone": "Cambria Heights",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 39,
+      "name": "Canarsie, Brooklyn",
+      "zone": "Canarsie",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 40,
+      "name": "Carroll Gardens, Brooklyn",
+      "zone": "Carroll Gardens",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 42,
+      "name": "Central Harlem North, Manhattan",
+      "zone": "Central Harlem North",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 41,
+      "name": "Central Harlem, Manhattan",
+      "zone": "Central Harlem",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 43,
+      "name": "Central Park, Manhattan",
+      "zone": "Central Park",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 44,
+      "name": "Charleston/Tottenville, Staten Island",
+      "zone": "Charleston/Tottenville",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 45,
+      "name": "Chinatown, Manhattan",
+      "zone": "Chinatown",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 46,
+      "name": "City Island, Bronx",
+      "zone": "City Island",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 47,
+      "name": "Claremont/Bathgate, Bronx",
+      "zone": "Claremont/Bathgate",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 48,
+      "name": "Clinton East, Manhattan",
+      "zone": "Clinton East",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 49,
+      "name": "Clinton Hill, Brooklyn",
+      "zone": "Clinton Hill",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 50,
+      "name": "Clinton West, Manhattan",
+      "zone": "Clinton West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 51,
+      "name": "Co-Op City, Bronx",
+      "zone": "Co-Op City",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 52,
+      "name": "Cobble Hill, Brooklyn",
+      "zone": "Cobble Hill",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 53,
+      "name": "College Point, Queens",
+      "zone": "College Point",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 54,
+      "name": "Columbia Street, Brooklyn",
+      "zone": "Columbia Street",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 55,
+      "name": "Coney Island, Brooklyn",
+      "zone": "Coney Island",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 56,
+      "name": "Corona, Queens",
+      "zone": "Corona",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 57,
+      "name": "Corona, Queens",
+      "zone": "Corona",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 58,
+      "name": "Country Club, Bronx",
+      "zone": "Country Club",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 60,
+      "name": "Crotona Park East, Bronx",
+      "zone": "Crotona Park East",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 59,
+      "name": "Crotona Park, Bronx",
+      "zone": "Crotona Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 61,
+      "name": "Crown Heights North, Brooklyn",
+      "zone": "Crown Heights North",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 62,
+      "name": "Crown Heights South, Brooklyn",
+      "zone": "Crown Heights South",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 63,
+      "name": "Cypress Hills, Brooklyn",
+      "zone": "Cypress Hills",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 66,
+      "name": "DUMBO/Vinegar Hill, Brooklyn",
+      "zone": "DUMBO/Vinegar Hill",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 64,
+      "name": "Douglaston, Queens",
+      "zone": "Douglaston",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 65,
+      "name": "Downtown Brooklyn/MetroTech, Brooklyn",
+      "zone": "Downtown Brooklyn/MetroTech",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 67,
+      "name": "Dyker Heights, Brooklyn",
+      "zone": "Dyker Heights",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 68,
+      "name": "East Chelsea, Manhattan",
+      "zone": "East Chelsea",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 69,
+      "name": "East Concourse/Concourse Village, Bronx",
+      "zone": "East Concourse/Concourse Village",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 70,
+      "name": "East Elmhurst, Queens",
+      "zone": "East Elmhurst",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 71,
+      "name": "East Flatbush/Farragut, Brooklyn",
+      "zone": "East Flatbush/Farragut",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 72,
+      "name": "East Flatbush/Remsen Village, Brooklyn",
+      "zone": "East Flatbush/Remsen Village",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 73,
+      "name": "East Flushing, Queens",
+      "zone": "East Flushing",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 74,
+      "name": "East Harlem North, Manhattan",
+      "zone": "East Harlem North",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 75,
+      "name": "East Harlem South, Manhattan",
+      "zone": "East Harlem South",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 76,
+      "name": "East New York, Brooklyn",
+      "zone": "East New York",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 77,
+      "name": "East New York/Pennsylvania Avenue, Brooklyn",
+      "zone": "East New York/Pennsylvania Avenue",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 78,
+      "name": "East Tremont, Bronx",
+      "zone": "East Tremont",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 79,
+      "name": "East Village, Manhattan",
+      "zone": "East Village",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 80,
+      "name": "East Williamsburg, Brooklyn",
+      "zone": "East Williamsburg",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 81,
+      "name": "Eastchester, Bronx",
+      "zone": "Eastchester",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 82,
+      "name": "Elmhurst, Queens",
+      "zone": "Elmhurst",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 83,
+      "name": "Elmhurst/Maspeth, Queens",
+      "zone": "Elmhurst/Maspeth",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 84,
+      "name": "Eltingville/Annadale/Prince's Bay, Staten Island",
+      "zone": "Eltingville/Annadale/Prince's Bay",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 85,
+      "name": "Erasmus, Brooklyn",
+      "zone": "Erasmus",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 86,
+      "name": "Far Rockaway, Queens",
+      "zone": "Far Rockaway",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 87,
+      "name": "Financial District North, Manhattan",
+      "zone": "Financial District North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 88,
+      "name": "Financial District South, Manhattan",
+      "zone": "Financial District South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 89,
+      "name": "Flatbush/Ditmas Park, Brooklyn",
+      "zone": "Flatbush/Ditmas Park",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 90,
+      "name": "Flatiron, Manhattan",
+      "zone": "Flatiron",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 91,
+      "name": "Flatlands, Brooklyn",
+      "zone": "Flatlands",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 93,
+      "name": "Flushing Meadows-Corona Park, Queens",
+      "zone": "Flushing Meadows-Corona Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 92,
+      "name": "Flushing, Queens",
+      "zone": "Flushing",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 94,
+      "name": "Fordham South, Bronx",
+      "zone": "Fordham South",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 95,
+      "name": "Forest Hills, Queens",
+      "zone": "Forest Hills",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 96,
+      "name": "Forest Park/Highland Park, Queens",
+      "zone": "Forest Park/Highland Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 97,
+      "name": "Fort Greene, Brooklyn",
+      "zone": "Fort Greene",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 98,
+      "name": "Fresh Meadows, Queens",
+      "zone": "Fresh Meadows",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 99,
+      "name": "Freshkills Park, Staten Island",
+      "zone": "Freshkills Park",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 100,
+      "name": "Garment District, Manhattan",
+      "zone": "Garment District",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 101,
+      "name": "Glen Oaks, Queens",
+      "zone": "Glen Oaks",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 102,
+      "name": "Glendale, Queens",
+      "zone": "Glendale",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 103,
+      "name": "Governor's Island/Ellis Island/Liberty Island, Manhattan",
+      "zone": "Governor's Island/Ellis Island/Liberty Island",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 104,
+      "name": "Governor's Island/Ellis Island/Liberty Island, Manhattan",
+      "zone": "Governor's Island/Ellis Island/Liberty Island",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 105,
+      "name": "Governor's Island/Ellis Island/Liberty Island, Manhattan",
+      "zone": "Governor's Island/Ellis Island/Liberty Island",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 106,
+      "name": "Gowanus, Brooklyn",
+      "zone": "Gowanus",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 107,
+      "name": "Gramercy, Manhattan",
+      "zone": "Gramercy",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 108,
+      "name": "Gravesend, Brooklyn",
+      "zone": "Gravesend",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 110,
+      "name": "Great Kills Park, Staten Island",
+      "zone": "Great Kills Park",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 109,
+      "name": "Great Kills, Staten Island",
+      "zone": "Great Kills",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 111,
+      "name": "Green-Wood Cemetery, Brooklyn",
+      "zone": "Green-Wood Cemetery",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 112,
+      "name": "Greenpoint, Brooklyn",
+      "zone": "Greenpoint",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 113,
+      "name": "Greenwich Village North, Manhattan",
+      "zone": "Greenwich Village North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 114,
+      "name": "Greenwich Village South, Manhattan",
+      "zone": "Greenwich Village South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 115,
+      "name": "Grymes Hill/Clifton, Staten Island",
+      "zone": "Grymes Hill/Clifton",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 116,
+      "name": "Hamilton Heights, Manhattan",
+      "zone": "Hamilton Heights",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 117,
+      "name": "Hammels/Arverne, Queens",
+      "zone": "Hammels/Arverne",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 118,
+      "name": "Heartland Village/Todt Hill, Staten Island",
+      "zone": "Heartland Village/Todt Hill",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 120,
+      "name": "Highbridge Park, Manhattan",
+      "zone": "Highbridge Park",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 119,
+      "name": "Highbridge, Bronx",
+      "zone": "Highbridge",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 121,
+      "name": "Hillcrest/Pomonok, Queens",
+      "zone": "Hillcrest/Pomonok",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 122,
+      "name": "Hollis, Queens",
+      "zone": "Hollis",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 123,
+      "name": "Homecrest, Brooklyn",
+      "zone": "Homecrest",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 124,
+      "name": "Howard Beach, Queens",
+      "zone": "Howard Beach",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 125,
+      "name": "Hudson Sq, Manhattan",
+      "zone": "Hudson Sq",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 126,
+      "name": "Hunts Point, Bronx",
+      "zone": "Hunts Point",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 128,
+      "name": "Inwood Hill Park, Manhattan",
+      "zone": "Inwood Hill Park",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 127,
+      "name": "Inwood, Manhattan",
+      "zone": "Inwood",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 132,
+      "name": "JFK Airport, Queens",
+      "zone": "JFK Airport",
+      "borough": "Queens",
+      "service_zone": "Airports"
+    },
+    {
+      "id": 129,
+      "name": "Jackson Heights, Queens",
+      "zone": "Jackson Heights",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 2,
+      "name": "Jamaica Bay, Queens",
+      "zone": "Jamaica Bay",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 131,
+      "name": "Jamaica Estates, Queens",
+      "zone": "Jamaica Estates",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 130,
+      "name": "Jamaica, Queens",
+      "zone": "Jamaica",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 133,
+      "name": "Kensington, Brooklyn",
+      "zone": "Kensington",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 135,
+      "name": "Kew Gardens Hills, Queens",
+      "zone": "Kew Gardens Hills",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 134,
+      "name": "Kew Gardens, Queens",
+      "zone": "Kew Gardens",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 136,
+      "name": "Kingsbridge Heights, Bronx",
+      "zone": "Kingsbridge Heights",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 137,
+      "name": "Kips Bay, Manhattan",
+      "zone": "Kips Bay",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 138,
+      "name": "LaGuardia Airport, Queens",
+      "zone": "LaGuardia Airport",
+      "borough": "Queens",
+      "service_zone": "Airports"
+    },
+    {
+      "id": 139,
+      "name": "Laurelton, Queens",
+      "zone": "Laurelton",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 140,
+      "name": "Lenox Hill East, Manhattan",
+      "zone": "Lenox Hill East",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 141,
+      "name": "Lenox Hill West, Manhattan",
+      "zone": "Lenox Hill West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 142,
+      "name": "Lincoln Square East, Manhattan",
+      "zone": "Lincoln Square East",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 143,
+      "name": "Lincoln Square West, Manhattan",
+      "zone": "Lincoln Square West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 144,
+      "name": "Little Italy/NoLiTa, Manhattan",
+      "zone": "Little Italy/NoLiTa",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 145,
+      "name": "Long Island City/Hunters Point, Queens",
+      "zone": "Long Island City/Hunters Point",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 146,
+      "name": "Long Island City/Queens Plaza, Queens",
+      "zone": "Long Island City/Queens Plaza",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 147,
+      "name": "Longwood, Bronx",
+      "zone": "Longwood",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 148,
+      "name": "Lower East Side, Manhattan",
+      "zone": "Lower East Side",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 149,
+      "name": "Madison, Brooklyn",
+      "zone": "Madison",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 150,
+      "name": "Manhattan Beach, Brooklyn",
+      "zone": "Manhattan Beach",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 151,
+      "name": "Manhattan Valley, Manhattan",
+      "zone": "Manhattan Valley",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 152,
+      "name": "Manhattanville, Manhattan",
+      "zone": "Manhattanville",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 153,
+      "name": "Marble Hill, Manhattan",
+      "zone": "Marble Hill",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 154,
+      "name": "Marine Park/Floyd Bennett Field, Brooklyn",
+      "zone": "Marine Park/Floyd Bennett Field",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 155,
+      "name": "Marine Park/Mill Basin, Brooklyn",
+      "zone": "Marine Park/Mill Basin",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 156,
+      "name": "Mariners Harbor, Staten Island",
+      "zone": "Mariners Harbor",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 157,
+      "name": "Maspeth, Queens",
+      "zone": "Maspeth",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 158,
+      "name": "Meatpacking/West Village West, Manhattan",
+      "zone": "Meatpacking/West Village West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 159,
+      "name": "Melrose South, Bronx",
+      "zone": "Melrose South",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 160,
+      "name": "Middle Village, Queens",
+      "zone": "Middle Village",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 161,
+      "name": "Midtown Center, Manhattan",
+      "zone": "Midtown Center",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 162,
+      "name": "Midtown East, Manhattan",
+      "zone": "Midtown East",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 163,
+      "name": "Midtown North, Manhattan",
+      "zone": "Midtown North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 164,
+      "name": "Midtown South, Manhattan",
+      "zone": "Midtown South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 165,
+      "name": "Midwood, Brooklyn",
+      "zone": "Midwood",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 166,
+      "name": "Morningside Heights, Manhattan",
+      "zone": "Morningside Heights",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 167,
+      "name": "Morrisania/Melrose, Bronx",
+      "zone": "Morrisania/Melrose",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 168,
+      "name": "Mott Haven/Port Morris, Bronx",
+      "zone": "Mott Haven/Port Morris",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 169,
+      "name": "Mount Hope, Bronx",
+      "zone": "Mount Hope",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 170,
+      "name": "Murray Hill, Manhattan",
+      "zone": "Murray Hill",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 171,
+      "name": "Murray Hill-Queens, Queens",
+      "zone": "Murray Hill-Queens",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 172,
+      "name": "New Dorp/Midland Beach, Staten Island",
+      "zone": "New Dorp/Midland Beach",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 1,
+      "name": "Newark Airport, EWR",
+      "zone": "Newark Airport",
+      "borough": "EWR",
+      "service_zone": "EWR"
+    },
+    {
+      "id": 173,
+      "name": "North Corona, Queens",
+      "zone": "North Corona",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 174,
+      "name": "Norwood, Bronx",
+      "zone": "Norwood",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 175,
+      "name": "Oakland Gardens, Queens",
+      "zone": "Oakland Gardens",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 176,
+      "name": "Oakwood, Staten Island",
+      "zone": "Oakwood",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 177,
+      "name": "Ocean Hill, Brooklyn",
+      "zone": "Ocean Hill",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 178,
+      "name": "Ocean Parkway South, Brooklyn",
+      "zone": "Ocean Parkway South",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 179,
+      "name": "Old Astoria, Queens",
+      "zone": "Old Astoria",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 265,
+      "name": "Outside of NYC",
+      "zone": "Outside of NYC",
+      "borough": "Unknown",
+      "service_zone": "Unknown"
+    },
+    {
+      "id": 180,
+      "name": "Ozone Park, Queens",
+      "zone": "Ozone Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 181,
+      "name": "Park Slope, Brooklyn",
+      "zone": "Park Slope",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 182,
+      "name": "Parkchester, Bronx",
+      "zone": "Parkchester",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 184,
+      "name": "Pelham Bay Park, Bronx",
+      "zone": "Pelham Bay Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 183,
+      "name": "Pelham Bay, Bronx",
+      "zone": "Pelham Bay",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 185,
+      "name": "Pelham Parkway, Bronx",
+      "zone": "Pelham Parkway",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 186,
+      "name": "Penn Station/Madison Sq West, Manhattan",
+      "zone": "Penn Station/Madison Sq West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 187,
+      "name": "Port Richmond, Staten Island",
+      "zone": "Port Richmond",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 189,
+      "name": "Prospect Heights, Brooklyn",
+      "zone": "Prospect Heights",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 190,
+      "name": "Prospect Park, Brooklyn",
+      "zone": "Prospect Park",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 188,
+      "name": "Prospect-Lefferts Gardens, Brooklyn",
+      "zone": "Prospect-Lefferts Gardens",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 191,
+      "name": "Queens Village, Queens",
+      "zone": "Queens Village",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 192,
+      "name": "Queensboro Hill, Queens",
+      "zone": "Queensboro Hill",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 193,
+      "name": "Queensbridge/Ravenswood, Queens",
+      "zone": "Queensbridge/Ravenswood",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 194,
+      "name": "Randalls Island, Manhattan",
+      "zone": "Randalls Island",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 195,
+      "name": "Red Hook, Brooklyn",
+      "zone": "Red Hook",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 196,
+      "name": "Rego Park, Queens",
+      "zone": "Rego Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 197,
+      "name": "Richmond Hill, Queens",
+      "zone": "Richmond Hill",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 198,
+      "name": "Ridgewood, Queens",
+      "zone": "Ridgewood",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 199,
+      "name": "Rikers Island, Bronx",
+      "zone": "Rikers Island",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 200,
+      "name": "Riverdale/North Riverdale/Fieldston, Bronx",
+      "zone": "Riverdale/North Riverdale/Fieldston",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 201,
+      "name": "Rockaway Park, Queens",
+      "zone": "Rockaway Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 202,
+      "name": "Roosevelt Island, Manhattan",
+      "zone": "Roosevelt Island",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 203,
+      "name": "Rosedale, Queens",
+      "zone": "Rosedale",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 204,
+      "name": "Rossville/Woodrow, Staten Island",
+      "zone": "Rossville/Woodrow",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 205,
+      "name": "Saint Albans, Queens",
+      "zone": "Saint Albans",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 206,
+      "name": "Saint George/New Brighton, Staten Island",
+      "zone": "Saint George/New Brighton",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 207,
+      "name": "Saint Michaels Cemetery/Woodside, Queens",
+      "zone": "Saint Michaels Cemetery/Woodside",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 208,
+      "name": "Schuylerville/Edgewater Park, Bronx",
+      "zone": "Schuylerville/Edgewater Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 209,
+      "name": "Seaport, Manhattan",
+      "zone": "Seaport",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 210,
+      "name": "Sheepshead Bay, Brooklyn",
+      "zone": "Sheepshead Bay",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 211,
+      "name": "SoHo, Manhattan",
+      "zone": "SoHo",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 212,
+      "name": "Soundview/Bruckner, Bronx",
+      "zone": "Soundview/Bruckner",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 213,
+      "name": "Soundview/Castle Hill, Bronx",
+      "zone": "Soundview/Castle Hill",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 214,
+      "name": "South Beach/Dongan Hills, Staten Island",
+      "zone": "South Beach/Dongan Hills",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 215,
+      "name": "South Jamaica, Queens",
+      "zone": "South Jamaica",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 216,
+      "name": "South Ozone Park, Queens",
+      "zone": "South Ozone Park",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 217,
+      "name": "South Williamsburg, Brooklyn",
+      "zone": "South Williamsburg",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 218,
+      "name": "Springfield Gardens North, Queens",
+      "zone": "Springfield Gardens North",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 219,
+      "name": "Springfield Gardens South, Queens",
+      "zone": "Springfield Gardens South",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 220,
+      "name": "Spuyten Duyvil/Kingsbridge, Bronx",
+      "zone": "Spuyten Duyvil/Kingsbridge",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 221,
+      "name": "Stapleton, Staten Island",
+      "zone": "Stapleton",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 222,
+      "name": "Starrett City, Brooklyn",
+      "zone": "Starrett City",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 223,
+      "name": "Steinway, Queens",
+      "zone": "Steinway",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 224,
+      "name": "Stuy Town/Peter Cooper Village, Manhattan",
+      "zone": "Stuy Town/Peter Cooper Village",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 225,
+      "name": "Stuyvesant Heights, Brooklyn",
+      "zone": "Stuyvesant Heights",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 226,
+      "name": "Sunnyside, Queens",
+      "zone": "Sunnyside",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 227,
+      "name": "Sunset Park East, Brooklyn",
+      "zone": "Sunset Park East",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 228,
+      "name": "Sunset Park West, Brooklyn",
+      "zone": "Sunset Park West",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 229,
+      "name": "Sutton Place/Turtle Bay North, Manhattan",
+      "zone": "Sutton Place/Turtle Bay North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 230,
+      "name": "Times Sq/Theatre District, Manhattan",
+      "zone": "Times Sq/Theatre District",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 231,
+      "name": "TriBeCa/Civic Center, Manhattan",
+      "zone": "TriBeCa/Civic Center",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 232,
+      "name": "Two Bridges/Seward Park, Manhattan",
+      "zone": "Two Bridges/Seward Park",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 233,
+      "name": "UN/Turtle Bay South, Manhattan",
+      "zone": "UN/Turtle Bay South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 234,
+      "name": "Union Sq, Manhattan",
+      "zone": "Union Sq",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 235,
+      "name": "University Heights/Morris Heights, Bronx",
+      "zone": "University Heights/Morris Heights",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 236,
+      "name": "Upper East Side North, Manhattan",
+      "zone": "Upper East Side North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 237,
+      "name": "Upper East Side South, Manhattan",
+      "zone": "Upper East Side South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 238,
+      "name": "Upper West Side North, Manhattan",
+      "zone": "Upper West Side North",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 239,
+      "name": "Upper West Side South, Manhattan",
+      "zone": "Upper West Side South",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 240,
+      "name": "Van Cortlandt Park, Bronx",
+      "zone": "Van Cortlandt Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 241,
+      "name": "Van Cortlandt Village, Bronx",
+      "zone": "Van Cortlandt Village",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 242,
+      "name": "Van Nest/Morris Park, Bronx",
+      "zone": "Van Nest/Morris Park",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 243,
+      "name": "Washington Heights North, Manhattan",
+      "zone": "Washington Heights North",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 244,
+      "name": "Washington Heights South, Manhattan",
+      "zone": "Washington Heights South",
+      "borough": "Manhattan",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 245,
+      "name": "West Brighton, Staten Island",
+      "zone": "West Brighton",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 246,
+      "name": "West Chelsea/Hudson Yards, Manhattan",
+      "zone": "West Chelsea/Hudson Yards",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 247,
+      "name": "West Concourse, Bronx",
+      "zone": "West Concourse",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 248,
+      "name": "West Farms/Bronx River, Bronx",
+      "zone": "West Farms/Bronx River",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 249,
+      "name": "West Village, Manhattan",
+      "zone": "West Village",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 250,
+      "name": "Westchester Village/Unionport, Bronx",
+      "zone": "Westchester Village/Unionport",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 251,
+      "name": "Westerleigh, Staten Island",
+      "zone": "Westerleigh",
+      "borough": "Staten Island",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 252,
+      "name": "Whitestone, Queens",
+      "zone": "Whitestone",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 253,
+      "name": "Willets Point, Queens",
+      "zone": "Willets Point",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 254,
+      "name": "Williamsbridge/Olinville, Bronx",
+      "zone": "Williamsbridge/Olinville",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 255,
+      "name": "Williamsburg (North Side), Brooklyn",
+      "zone": "Williamsburg (North Side)",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 256,
+      "name": "Williamsburg (South Side), Brooklyn",
+      "zone": "Williamsburg (South Side)",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 257,
+      "name": "Windsor Terrace, Brooklyn",
+      "zone": "Windsor Terrace",
+      "borough": "Brooklyn",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 258,
+      "name": "Woodhaven, Queens",
+      "zone": "Woodhaven",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 259,
+      "name": "Woodlawn/Wakefield, Bronx",
+      "zone": "Woodlawn/Wakefield",
+      "borough": "Bronx",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 260,
+      "name": "Woodside, Queens",
+      "zone": "Woodside",
+      "borough": "Queens",
+      "service_zone": "Boro Zone"
+    },
+    {
+      "id": 261,
+      "name": "World Trade Center, Manhattan",
+      "zone": "World Trade Center",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 262,
+      "name": "Yorkville East, Manhattan",
+      "zone": "Yorkville East",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 263,
+      "name": "Yorkville West, Manhattan",
+      "zone": "Yorkville West",
+      "borough": "Manhattan",
+      "service_zone": "Yellow Zone"
+    },
+    {
+      "id": 264,
+      "name": "Unknown",
+      "zone": "Unknown",
+      "borough": "Unknown",
+      "service_zone": "Unknown"
+    }
+  ]
+}

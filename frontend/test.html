@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Taxi Fare Predictor - Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚖 NYC Taxi Fare Predictor - API Test</h1>
+        
+        <div class="section">
+            <h3>1. API Health Check</h3>
+            <button onclick="testHealth()">Test API Health</button>
+            <div id="healthResult" class="result"></div>
+        </div>
+        
+        <div class="section">
+            <h3>2. Location-based Prediction Test</h3>
+            <p>Testing prediction from Times Square (161) to Brooklyn (230)</p>
+            <button onclick="testLocationPrediction()">Test Location Prediction</button>
+            <div id="locationResult" class="result"></div>
+        </div>
+        
+        <div class="section">
+            <h3>3. Quick Examples</h3>
+            <button onclick="testQuickExample('jfk')">JFK Airport Trip</button>
+            <button onclick="testQuickExample('local')">Local Manhattan Trip</button>
+            <button onclick="testQuickExample('brooklyn')">Manhattan to Brooklyn</button>
+            <div id="quickResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000';
+
+        async function testHealth() {
+            const resultDiv = document.getElementById('healthResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/`);
+                const data = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <h4>✅ API Health Check Successful</h4>
+                    <p><strong>Status:</strong> ${data.status}</p>
+                    <p><strong>Model Loaded:</strong> ${data.model_loaded ? '✅' : '❌'}</p>
+                    <p><strong>Scaler Loaded:</strong> ${data.scaler_loaded ? '✅' : '❌'}</p>
+                    <p><strong>Distance Matrix:</strong> ${data.distance_matrix_loaded ? '✅' : '❌'}</p>
+                    <p><strong>Features:</strong> ${data.total_features}</p>
+                `;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ Health Check Failed</h4>
+                    <p>Error: ${error.message}</p>
+                    <p>Make sure the API server is running on port 5000</p>
+                `;
+            }
+        }
+
+        async function testLocationPrediction() {
+            const resultDiv = document.getElementById('locationResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = 'Testing location-based prediction...';
+            
+            try {
+                const tripData = {
+                    pickup_location_id: 161,  // Times Square
+                    dropoff_location_id: 230, // Brooklyn
+                    passenger_count: 1,
+                    pickup_hour: 14,
+                    pickup_day: 'Friday',
+                    pickup_month: 7
+                };
+                
+                const response = await fetch(`${API_BASE}/predict_from_locations`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(tripData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>🎯 Prediction Successful</h4>
+                        <p><strong>Predicted Fare:</strong> $${data.predicted_fare}</p>
+                        <p><strong>Distance:</strong> ${data.trip_details.trip_distance} miles</p>
+                        <p><strong>Duration:</strong> ${data.trip_details.trip_duration_minutes} minutes</p>
+                        <p><strong>Route:</strong> Zone ${data.trip_details.pickup_location_id} → Zone ${data.trip_details.dropoff_location_id}</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Prediction failed');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ Prediction Failed</h4>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testQuickExample(type) {
+            const resultDiv = document.getElementById('quickResult');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            
+            let tripData;
+            let description;
+            
+            switch(type) {
+                case 'jfk':
+                    tripData = {
+                        pickup_location_id: 132,  // JFK
+                        dropoff_location_id: 161, // Times Square
+                        passenger_count: 1,
+                        pickup_hour: 10,
+                        pickup_day: 'Monday',
+                        pickup_month: 7
+                    };
+                    description = 'JFK Airport to Times Square';
+                    break;
+                case 'local':
+                    tripData = {
+                        pickup_location_id: 161,  // Times Square
+                        dropoff_location_id: 162, // Theater District
+                        passenger_count: 2,
+                        pickup_hour: 20,
+                        pickup_day: 'Saturday',
+                        pickup_month: 7
+                    };
+                    description = 'Local Manhattan Trip';
+                    break;
+                case 'brooklyn':
+                    tripData = {
+                        pickup_location_id: 161,  // Times Square
+                        dropoff_location_id: 36,  // Brooklyn Heights
+                        passenger_count: 1,
+                        pickup_hour: 17,
+                        pickup_day: 'Friday',
+                        pickup_month: 7
+                    };
+                    description = 'Manhattan to Brooklyn';
+                    break;
+            }
+            
+            resultDiv.innerHTML = `Testing ${description}...`;
+            
+            try {
+                const response = await fetch(`${API_BASE}/predict_from_locations`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(tripData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h4>🚖 ${description}</h4>
+                        <p><strong>Predicted Fare:</strong> $${data.predicted_fare}</p>
+                        <p><strong>Distance:</strong> ${data.trip_details.trip_distance} miles</p>
+                        <p><strong>Duration:</strong> ${data.trip_details.trip_duration_minutes} minutes</p>
+                        <p><strong>Passengers:</strong> ${data.trip_details.passenger_count}</p>
+                        <p><strong>Time:</strong> ${data.trip_details.pickup_hour}:00 on ${data.trip_details.pickup_day}</p>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Prediction failed');
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <h4>❌ ${description} Failed</h4>
+                    <p>Error: ${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

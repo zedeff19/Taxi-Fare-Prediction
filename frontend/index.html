@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Taxi Fare Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚖 NYC Taxi Fare Predictor</h1>
+            <p>Get instant fare estimates for your NYC taxi rides</p>
+        </header>
+
+        <main>
+            <!-- API Health Check Section -->
+            <section class="card">
+                <h2>🔧 API Status</h2>
+                <button onclick="testHealthCheck()" class="btn btn-secondary">
+                    Check API Health
+                </button>
+                <div id="healthResult" class="result" style="display: none;"></div>
+            </section>
+
+            <!-- Fare Prediction Section -->
+            <section class="card">
+                <h2>📍 Plan Your Trip</h2>
+                
+                <form class="trip-form" onsubmit="predictFare(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickupLocation">
+                                <span class="icon">📍</span>
+                                Pickup Location
+                            </label>
+                            <select id="pickupLocation" required>
+                                <option value="">Select pickup location...</option>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dropoffLocation">
+                                <span class="icon">🎯</span>
+                                Dropoff Location
+                            </label>
+                            <select id="dropoffLocation" required>
+                                <option value="">Select dropoff location...</option>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengerCount">
+                                <span class="icon">👥</span>
+                                Passengers
+                            </label>
+                            <select id="passengerCount" required>
+                                <option value="1">1 Passenger</option>
+                                <option value="2">2 Passengers</option>
+                                <option value="3">3 Passengers</option>
+                                <option value="4">4 Passengers</option>
+                                <option value="5">5 Passengers</option>
+                                <option value="6">6 Passengers</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pickupHour">
+                                <span class="icon">🕐</span>
+                                Pickup Time
+                            </label>
+                            <select id="pickupHour" required>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickupDay">
+                                <span class="icon">📅</span>
+                                Day of Week
+                            </label>
+                            <select id="pickupDay" required>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday" selected>Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pickupMonth">
+                                <span class="icon">📆</span>
+                                Month
+                            </label>
+                            <select id="pickupMonth" required>
+                                <option value="1" selected>January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        🚖 Get Fare Estimate
+                    </button>
+                </form>
+
+                <div id="predictionResult" class="result" style="display: none;"></div>
+            </section>
+
+            <!-- Quick Estimates Section -->
+            <section class="card">
+                <h2>⚡ Quick Estimates</h2>
+                <div class="quick-estimates">
+                    <button onclick="quickEstimate('JFK', 'Manhattan')" class="btn btn-outline">
+                        JFK ↔ Manhattan
+                    </button>
+                    <button onclick="quickEstimate('LGA', 'Manhattan')" class="btn btn-outline">
+                        LGA ↔ Manhattan
+                    </button>
+                    <button onclick="quickEstimate('Manhattan', 'Brooklyn')" class="btn btn-outline">
+                        Manhattan ↔ Brooklyn
+                    </button>
+                    <button onclick="quickEstimate('Times Square', 'Central Park')" class="btn btn-outline">
+                        Times Square ↔ Central Park
+                    </button>
+                </div>
+                <div id="quickEstimateResult" class="result" style="display: none;"></div>
+            </section>
+
+            <!-- Trip Statistics -->
+            <section class="card">
+                <h2>📊 About NYC Taxi Fares</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">$2.50</span>
+                        <span class="stat-label">Base Fare</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$0.50</span>
+                        <span class="stat-label">MTA Tax</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$2.50</span>
+                        <span class="stat-label">Congestion Surcharge</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">18-20%</span>
+                        <span class="stat-label">Typical Tip</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>🤖 Powered by Machine Learning | NYC Taxi Fare Prediction Model</p>
+            <p>Note: Estimates are based on historical data and may vary from actual fares</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
