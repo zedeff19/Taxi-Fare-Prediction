@@ -6,11 +6,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('🚀 Initializing Taxi Fare Predictor...');
     
     await loadTaxiZones();
-    populateTimeOptions();
+    initializeTimeField();
     setupFormValidation();
     
     console.log('✅ Application initialized successfully');
 });
+
+// Initialize time field with current time
+function initializeTimeField() {
+    const timeElement = document.getElementById('pickupTime');
+    if (timeElement) {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        timeElement.value = `${hours}:${minutes}`;
+        console.log(`⏰ Time field initialized to: ${timeElement.value}`);
+    }
+}
 
 // Load taxi zones from JSON file
 async function loadTaxiZones() {
@@ -97,30 +109,16 @@ function populateLocationDropdowns() {
     console.log('✅ Location dropdowns populated');
 }
 
-// Populate time options
-function populateTimeOptions() {
-    const hourSelect = document.getElementById('pickupHour');
-    
-    // Add hour options (0-23)
-    for (let hour = 0; hour < 24; hour++) {
-        const displayHour = hour === 0 ? '12:00 AM' :
-                          hour < 12 ? `${hour}:00 AM` :
-                          hour === 12 ? '12:00 PM' :
-                          `${hour - 12}:00 PM`;
-        
-        const option = new Option(displayHour, hour);
-        if (hour === 14) option.selected = true; // Default to 2 PM
-        hourSelect.appendChild(option);
-    }
-}
-
 // Setup form validation
 function setupFormValidation() {
     const form = document.querySelector('.trip-form');
-    const inputs = form.querySelectorAll('select[required]');
+    const inputs = form.querySelectorAll('select[required], input[required]');
     
     inputs.forEach(input => {
         input.addEventListener('change', validateForm);
+        if (input.type === 'time') {
+            input.addEventListener('input', validateForm);
+        }
     });
 }
 
@@ -128,7 +126,7 @@ function setupFormValidation() {
 function validateForm() {
     const form = document.querySelector('.trip-form');
     const submitBtn = form.querySelector('button[type="submit"]');
-    const requiredInputs = form.querySelectorAll('select[required]');
+    const requiredInputs = form.querySelectorAll('select[required], input[required]');
     
     let isValid = true;
     requiredInputs.forEach(input => {
@@ -238,14 +236,71 @@ async function predictFare(event) {
 
 // Get form data
 function getFormData() {
-    return {
-        pickup_location_id: parseInt(document.getElementById('pickupLocation').value),
-        dropoff_location_id: parseInt(document.getElementById('dropoffLocation').value),
-        passenger_count: parseInt(document.getElementById('passengerCount').value),
-        pickup_hour: parseInt(document.getElementById('pickupHour').value),
-        pickup_day: document.getElementById('pickupDay').value,
-        pickup_month: parseInt(document.getElementById('pickupMonth').value)
-    };
+    try {
+        // Get current date for day and month (but use user input for time)
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1; // JavaScript months are 0-indexed
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const currentDay = dayNames[now.getDay()];
+        
+        // Get form elements with null checks
+        const pickupElement = document.getElementById('pickupLocation');
+        const dropoffElement = document.getElementById('dropoffLocation');
+        const passengerElement = document.getElementById('passengerCount');
+        const timeElement = document.getElementById('pickupTime');
+        
+        console.log('Form elements check:', {
+            pickupElement: pickupElement,
+            dropoffElement: dropoffElement,
+            passengerElement: passengerElement,
+            timeElement: timeElement
+        });
+        
+        if (!pickupElement || !dropoffElement || !passengerElement || !timeElement) {
+            throw new Error('One or more form elements not found');
+        }
+        
+        // Parse the time input (format: "HH:MM")
+        let pickupHour;
+        if (timeElement.value) {
+            const timeValue = timeElement.value; // e.g., "14:30"
+            pickupHour = parseInt(timeValue.split(':')[0]); // Extract hour
+            console.log(`Time input: ${timeValue} -> Hour: ${pickupHour}`);
+        } else {
+            // Fallback to current hour if no time selected
+            pickupHour = now.getHours();
+            console.log(`No time input, using current hour: ${pickupHour}`);
+        }
+        
+        // Handle passenger count - use distinct values for the ranges
+        const passengerRange = passengerElement.value;
+        let passengerCount;
+        if (passengerRange === '1-4') {
+            passengerCount = 1; // Use lower end for testing difference
+        } else if (passengerRange === '4-7') {
+            passengerCount = 6; // Use higher end for testing difference
+        } else {
+            passengerCount = 1; // Default fallback
+        }
+        
+        console.log(`Passenger range: ${passengerRange} -> converted to: ${passengerCount}`);
+        
+        const formData = {
+            pickup_location_id: parseInt(pickupElement.value),
+            dropoff_location_id: parseInt(dropoffElement.value),
+            passenger_count: passengerCount,
+            pickup_hour: pickupHour,
+            pickup_day: currentDay,
+            pickup_month: currentMonth
+        };
+        
+        console.log('Form data collected:', formData);
+        return formData;
+        
+    } catch (error) {
+        console.error('Error in getFormData:', error);
+        throw error;
+    }
 }
 
 // Display success result
@@ -256,10 +311,14 @@ function displaySuccessResult(data, formData) {
     const pickupZone = taxiZones.find(z => z.id === formData.pickup_location_id);
     const dropoffZone = taxiZones.find(z => z.id === formData.dropoff_location_id);
     
-    // Format time
-    const timeStr = formatTime(formData.pickup_hour);
+    // Get the actual time input value to display
+    const timeInputValue = document.getElementById('pickupTime').value;
+    const timeStr = timeInputValue ? formatTimeInput(timeInputValue) : formatTime(formData.pickup_hour);
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    // Get original passenger range from form
+    const passengerRange = document.getElementById('passengerCount').value;
     
     resultDiv.className = 'result success';
     resultDiv.innerHTML = `
@@ -272,7 +331,7 @@ function displaySuccessResult(data, formData) {
             <p><strong>To:</strong> ${dropoffZone ? dropoffZone.name : 'Unknown'}</p>
             <p><strong>Distance:</strong> ${data.trip_details.trip_distance} miles</p>
             <p><strong>Duration:</strong> ~${data.trip_details.trip_duration_minutes} minutes</p>
-            <p><strong>Passengers:</strong> ${formData.passenger_count}</p>
+            <p><strong>Passengers:</strong> ${passengerRange} passengers</p>
             <p><strong>Time:</strong> ${timeStr} on ${formData.pickup_day}, ${monthNames[formData.pickup_month - 1]}</p>
         </div>
         
@@ -398,6 +457,20 @@ function findLocationByName(searchName) {
     }
     
     return match;
+}
+
+// Helper function to format time input (HH:MM format)
+function formatTimeInput(timeValue) {
+    if (!timeValue) return '';
+    
+    const [hours, minutes] = timeValue.split(':');
+    const hour = parseInt(hours);
+    const min = minutes;
+    
+    if (hour === 0) return `12:${min} AM`;
+    if (hour < 12) return `${hour}:${min} AM`;
+    if (hour === 12) return `12:${min} PM`;
+    return `${hour - 12}:${min} PM`;
 }
 
 // Helper function to format time
