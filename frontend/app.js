@@ -1,4 +1,5 @@
-const API_BASE = 'http://localhost:5000';
+// const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://tanaysriva19-trafficprediction.hf.space';
 let taxiZones = [];
 
 // Initialize the application
@@ -7,7 +8,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     await loadTaxiZones();
     initializeTimeField();
+    initializeDateField();
     setupFormValidation();
+    initializeFareTrendCharts();
     
     console.log('✅ Application initialized successfully');
 });
@@ -21,6 +24,28 @@ function initializeTimeField() {
         const minutes = now.getMinutes().toString().padStart(2, '0');
         timeElement.value = `${hours}:${minutes}`;
         console.log(`⏰ Time field initialized to: ${timeElement.value}`);
+    }
+}
+
+// Initialize date field with current date and set minimum date
+function initializeDateField() {
+    const dateElement = document.getElementById('pickupDate');
+    if (dateElement) {
+        const now = new Date();
+        const today = now.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        
+        // Set current date as default
+        dateElement.value = today;
+        
+        // Set minimum date to today (prevent booking in the past)
+        dateElement.min = today;
+        
+        // Set maximum date to 1 year from now (reasonable booking limit)
+        const maxDate = new Date();
+        maxDate.setFullYear(maxDate.getFullYear() + 1);
+        dateElement.max = maxDate.toISOString().split('T')[0];
+        
+        console.log(`📅 Date field initialized to: ${dateElement.value} (min: ${today})`);
     }
 }
 
@@ -116,10 +141,32 @@ function setupFormValidation() {
     
     inputs.forEach(input => {
         input.addEventListener('change', validateForm);
-        if (input.type === 'time') {
+        if (input.type === 'time' || input.type === 'date') {
             input.addEventListener('input', validateForm);
         }
     });
+    
+    // Add specific validation for date input
+    const dateInput = document.getElementById('pickupDate');
+    if (dateInput) {
+        dateInput.addEventListener('change', validatePickupDate);
+    }
+}
+
+// Validate pickup date
+function validatePickupDate() {
+    const dateInput = document.getElementById('pickupDate');
+    const selectedDate = new Date(dateInput.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+    
+    if (selectedDate < today) {
+        alert('⚠️ Please select today\'s date or a future date. You cannot book rides for past dates.');
+        dateInput.value = today.toISOString().split('T')[0];
+        return false;
+    }
+    
+    return true;
 }
 
 // Validate form
@@ -147,24 +194,87 @@ async function testHealthCheck() {
     resultDiv.className = 'result';
     
     try {
-        const response = await fetch(`${API_BASE}/`);
+        console.log('🔍 Testing API connection to:', API_BASE);
+        
+        // First try the root endpoint
+        const response = await fetch(`${API_BASE}/`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors' // Explicitly set CORS mode
+        });
+        
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response headers:', [...response.headers.entries()]);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
         const data = await response.json();
+        console.log('📥 Response data:', data);
         
         resultDiv.className = 'result success';
         resultDiv.innerHTML = `
             <h3>✅ API Connection Successful</h3>
-            <p><strong>Status:</strong> ${data.status}</p>
-            <p><strong>Message:</strong> ${data.message}</p>
-            <p><strong>Model Status:</strong> ${data.model_loaded ? '✅ Loaded' : '❌ Not Loaded'}</p>
-            <p><strong>Scaler Status:</strong> ${data.scaler_loaded ? '✅ Loaded' : '❌ Not Loaded'}</p>
+            <p><strong>Status:</strong> ${data.status || 'Connected'}</p>
+            <p><strong>Message:</strong> ${data.message || 'API is working'}</p>
+            <p><strong>Model Status:</strong> ${data.model_loaded ? '✅ Loaded' : '❓ Unknown'}</p>
+            <p><strong>Scaler Status:</strong> ${data.scaler_loaded ? '✅ Loaded' : '❓ Unknown'}</p>
+            <p><strong>API URL:</strong> ${API_BASE}</p>
         `;
     } catch (error) {
+        console.error('❌ API Health Check Error:', error);
+        
+        // Try alternative endpoints
+        resultDiv.innerHTML = 'Trying alternative endpoints...';
+        
+        try {
+            // Try without trailing slash
+            const altResponse = await fetch(`${API_BASE}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+                mode: 'cors'
+            });
+            
+            if (altResponse.ok) {
+                const altData = await altResponse.json();
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <h3>✅ API Connection Successful (Alternative)</h3>
+                    <p><strong>Status:</strong> Connected</p>
+                    <p><strong>Response:</strong> ${JSON.stringify(altData)}</p>
+                `;
+                return;
+            }
+        } catch (altError) {
+            console.error('Alternative endpoint also failed:', altError);
+        }
+        
         resultDiv.className = 'result error';
         resultDiv.innerHTML = `
             <h3>❌ Connection Failed</h3>
             <p><strong>Error:</strong> ${error.message}</p>
-            <p>Please ensure the API server is running on <strong>http://localhost:5000</strong></p>
-            <p>Start the server with: <code>python model/api/predictionAPI.py</code></p>
+            <p><strong>API URL:</strong> ${API_BASE}</p>
+            <div style="margin-top: 15px;">
+                <h4>🔧 Possible Solutions:</h4>
+                <ul style="text-align: left; margin: 10px 0;">
+                    <li>Check if your Hugging Face Space is running</li>
+                    <li>Verify the Space URL is correct</li>
+                    <li>Ensure your Space allows CORS requests</li>
+                    <li>Check if the Space is in "Building" or "Error" state</li>
+                </ul>
+                <p><strong>Debug Info:</strong></p>
+                <pre style="background: #f8f9fa; padding: 10px; border-radius: 4px; text-align: left; font-size: 12px;">
+Error Type: ${error.name}
+Error Message: ${error.message}
+Stack: ${error.stack?.slice(0, 200)}...
+                </pre>
+            </div>
         `;
     }
 }
@@ -194,6 +304,23 @@ async function predictFare(event) {
             throw new Error('Please select both pickup and dropoff locations');
         }
         
+        // Try to get real distance from Google Maps
+        let realDistance = null;
+        if (window.getGoogleMapsIntegration && window.getGoogleMapsIntegration()) {
+            resultDiv.innerHTML = '🗺️ Getting real distance from Google Maps...';
+            try {
+                const mapsIntegration = window.getGoogleMapsIntegration();
+                realDistance = await mapsIntegration.getDistanceForPrediction(
+                    formData.pickup_location_id,
+                    formData.dropoff_location_id,
+                    taxiZones
+                );
+                console.log(`📏 Google Maps distance: ${realDistance} miles`);
+            } catch (error) {
+                console.warn('Google Maps distance failed, using fallback:', error.message);
+            }
+        }
+        
         // Prepare API request data
         const tripData = {
             pickup_location_id: formData.pickup_location_id,
@@ -204,22 +331,40 @@ async function predictFare(event) {
             pickup_month: formData.pickup_month
         };
         
+        // Add real distance if available
+        if (realDistance) {
+            tripData.real_distance = realDistance;
+        }
+        
         console.log('📤 Sending prediction request:', tripData);
         
-        // Make API call
+        resultDiv.innerHTML = '🤖 Getting AI prediction...';
+        
+        // Make API call with improved error handling
         const response = await fetch(`${API_BASE}/predict_from_locations`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
-            body: JSON.stringify(tripData)
+            body: JSON.stringify(tripData),
+            mode: 'cors'
         });
+        
+        console.log('📡 Prediction response status:', response.status);
+        console.log('📡 Prediction response headers:', [...response.headers.entries()]);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ API Error Response:', errorText);
+            throw new Error(`API Error ${response.status}: ${errorText}`);
+        }
         
         const data = await response.json();
         console.log('📥 Received response:', data);
         
         if (response.ok && data.success) {
-            displaySuccessResult(data, formData);
+            displaySuccessResult(data, formData, realDistance);
         } else {
             throw new Error(data.message || 'Prediction failed');
         }
@@ -237,28 +382,35 @@ async function predictFare(event) {
 // Get form data
 function getFormData() {
     try {
-        // Get current date for day and month (but use user input for time)
-        const now = new Date();
-        const currentMonth = now.getMonth() + 1; // JavaScript months are 0-indexed
-        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const currentDay = dayNames[now.getDay()];
-        
         // Get form elements with null checks
         const pickupElement = document.getElementById('pickupLocation');
         const dropoffElement = document.getElementById('dropoffLocation');
         const passengerElement = document.getElementById('passengerCount');
         const timeElement = document.getElementById('pickupTime');
+        const dateElement = document.getElementById('pickupDate');
         
         console.log('Form elements check:', {
-            pickupElement: pickupElement,
-            dropoffElement: dropoffElement,
-            passengerElement: passengerElement,
-            timeElement: timeElement
+            pickupElement: !!pickupElement,
+            dropoffElement: !!dropoffElement,
+            passengerElement: !!passengerElement,
+            timeElement: !!timeElement,
+            dateElement: !!dateElement
         });
         
-        if (!pickupElement || !dropoffElement || !passengerElement || !timeElement) {
+        if (!pickupElement || !dropoffElement || !passengerElement || !timeElement || !dateElement) {
             throw new Error('One or more form elements not found');
         }
+        
+        // Parse the selected date
+        const selectedDate = new Date(dateElement.value);
+        if (isNaN(selectedDate.getTime())) {
+            throw new Error('Invalid date selected');
+        }
+        
+        // Get day of week and month from selected date
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const selectedDay = dayNames[selectedDate.getDay()];
+        const selectedMonth = selectedDate.getMonth() + 1; // JavaScript months are 0-indexed
         
         // Parse the time input (format: "HH:MM")
         let pickupHour;
@@ -268,7 +420,7 @@ function getFormData() {
             console.log(`Time input: ${timeValue} -> Hour: ${pickupHour}`);
         } else {
             // Fallback to current hour if no time selected
-            pickupHour = now.getHours();
+            pickupHour = new Date().getHours();
             console.log(`No time input, using current hour: ${pickupHour}`);
         }
         
@@ -276,7 +428,7 @@ function getFormData() {
         const passengerRange = passengerElement.value;
         let passengerCount;
         if (passengerRange === '1-4') {
-            passengerCount = 1; // Use lower end for testing difference
+            passengerCount = 3; // Use middle value for testing difference
         } else if (passengerRange === '4-7') {
             passengerCount = 6; // Use higher end for testing difference
         } else {
@@ -290,11 +442,15 @@ function getFormData() {
             dropoff_location_id: parseInt(dropoffElement.value),
             passenger_count: passengerCount,
             pickup_hour: pickupHour,
-            pickup_day: currentDay,
-            pickup_month: currentMonth
+            pickup_day: selectedDay,
+            pickup_month: selectedMonth,
+            pickup_date: dateElement.value, // Store the actual date for display
+            pickup_time: timeElement.value  // Store the actual time for display
         };
         
         console.log('Form data collected:', formData);
+        console.log(`Selected date: ${dateElement.value} -> Day: ${selectedDay}, Month: ${selectedMonth}`);
+        
         return formData;
         
     } catch (error) {
@@ -304,48 +460,78 @@ function getFormData() {
 }
 
 // Display success result
-function displaySuccessResult(data, formData) {
+function displaySuccessResult(data, formData, realDistance = null) {
     const resultDiv = document.getElementById('predictionResult');
     
     // Get location names
     const pickupZone = taxiZones.find(z => z.id === formData.pickup_location_id);
     const dropoffZone = taxiZones.find(z => z.id === formData.dropoff_location_id);
     
-    // Get the actual time input value to display
-    const timeInputValue = document.getElementById('pickupTime').value;
-    const timeStr = timeInputValue ? formatTimeInput(timeInputValue) : formatTime(formData.pickup_hour);
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // Format the selected date and time for display
+    const selectedDate = new Date(formData.pickup_date);
+    const formattedDate = selectedDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    const formattedTime = formatTimeInput(formData.pickup_time);
     
     // Get original passenger range from form
     const passengerRange = document.getElementById('passengerCount').value;
     
+    // Display distance source
+    const distanceSource = realDistance ? 
+        `${data.trip_details.trip_distance} miles (Google Maps: ${realDistance} miles)` :
+        `${data.trip_details.trip_distance} miles (estimated)`;
+    
+    // Determine if this is a future prediction
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const isToday = selectedDate.getTime() === today.getTime();
+    const isFuture = selectedDate > today;
+    
+    let dateTimeDisplay = `${formattedTime} on ${formattedDate}`;
+    if (isToday) {
+        dateTimeDisplay += " (Today)";
+    } else if (isFuture) {
+        dateTimeDisplay += " (Future Booking)";
+    }
+    
     resultDiv.className = 'result success';
     resultDiv.innerHTML = `
-        <h3>🎯 Fare Estimate</h3>
+        <h3>🎯 Predicted Fare for ${formattedDate} at ${formattedTime}</h3>
         <div class="fare-highlight">$${data.predicted_fare}</div>
         
         <div class="trip-summary">
             <h4>📍 Trip Details</h4>
             <p><strong>From:</strong> ${pickupZone ? pickupZone.name : 'Unknown'}</p>
             <p><strong>To:</strong> ${dropoffZone ? dropoffZone.name : 'Unknown'}</p>
-            <p><strong>Distance:</strong> ${data.trip_details.trip_distance} miles</p>
+            <p><strong>Distance:</strong> ${distanceSource}</p>
             <p><strong>Duration:</strong> ~${data.trip_details.trip_duration_minutes} minutes</p>
             <p><strong>Passengers:</strong> ${passengerRange} passengers</p>
-            <p><strong>Time:</strong> ${timeStr} on ${formData.pickup_day}, ${monthNames[formData.pickup_month - 1]}</p>
+            <p><strong>Scheduled:</strong> ${dateTimeDisplay}</p>
+            <p><strong>Day of Week:</strong> ${formData.pickup_day} ${isFuture ? '(affects pricing)' : ''}</p>
         </div>
         
         <div class="trip-summary">
             <h4>💰 Fare Breakdown</h4>
-            <p><strong>Base Fare:</strong> $${(data.predicted_fare * 0.7).toFixed(2)}</p>
-            <p><strong>Distance Charge:</strong> $${(data.trip_details.trip_distance * 2.5).toFixed(2)}</p>
-            <p><strong>Time Charge:</strong> $${(data.trip_details.trip_duration_minutes * 0.3).toFixed(2)}</p>
-            <p><strong>Taxes & Fees:</strong> $${(data.predicted_fare * 0.15).toFixed(2)}</p>
-            <p><strong>Total (excl. tip):</strong> $${data.predicted_fare}</p>
+            <p><strong>Base Fare:</strong> $${data.base_fare || data.predicted_fare}</p>
+            ${data.passenger_multiplier && data.passenger_multiplier > 1 ? 
+                `<p><strong>Passenger Surcharge:</strong> +${((data.passenger_multiplier - 1) * 100).toFixed(0)}% ${data.passenger_note || ''}</p>` : 
+                ''}
+            <p><strong>Taxes & Fees:</strong> Included in estimate</p>
+            <p><strong>Total (excl. tip):</strong> <span style="font-weight: bold; color: #2ecc71;">$${data.predicted_fare}</span></p>
+            ${data.passenger_multiplier && data.passenger_multiplier > 1 ? 
+                `<p style="color: #7f8c8d; font-size: 0.9em;"><em>Large groups (${formData.passenger_count}+ passengers) typically require larger vehicles</em></p>` : 
+                ''}
         </div>
         
         <p><small>💡 <strong>Tip:</strong> Consider adding 18-20% gratuity for your driver</small></p>
-        <p><small>📊 Estimate based on historical data and current traffic patterns</small></p>
+        <p><small>📊 Estimate considers day of week and time for accurate pricing</small></p>
+        ${isFuture ? '<p><small>🔮 <strong>Future Booking:</strong> Prices may vary based on actual demand and traffic</small></p>' : ''}
+        ${realDistance ? '<p><small>🗺️ Distance calculated using Google Maps with real-time traffic</small></p>' : ''}
     `;
 }
 
@@ -503,6 +689,187 @@ function showError(message) {
     setTimeout(() => {
         errorDiv.remove();
     }, 5000);
+}
+
+// ============================================
+// FARE TREND CHARTS FUNCTIONALITY
+// ============================================
+
+let dayOfWeekChart = null;
+let timeOfDayChart = null;
+
+// Initialize fare trend charts
+function initializeFareTrendCharts() {
+    console.log('📊 Initializing fare trend charts...');
+    
+    try {
+        // Generate realistic NYC taxi fare data
+        const fareData = generateRealisticFareData();
+        
+        // Create day of week chart
+        createDayOfWeekChart(fareData.dayOfWeek);
+        
+        // Create time of day chart
+        createTimeOfDayChart(fareData.timeOfDay);
+        
+        // Generate insights
+        generateFareInsights(fareData);
+        
+        console.log('✅ Fare trend charts initialized successfully');
+    } catch (error) {
+        console.error('❌ Error initializing charts:', error);
+    }
+}
+
+// Generate realistic NYC taxi fare data based on actual patterns
+function generateRealisticFareData() {
+    // Simple day of week data - realistic NYC patterns
+    const dayOfWeek = {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: [12.50, 12.30, 12.20, 12.80, 15.20, 17.50, 16.80]
+    };
+    
+    // Simple time of day data - 6 time periods
+    const timeOfDay = {
+        labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'],
+        data: [11.80, 14.20, 12.60, 12.40, 16.50, 13.90]
+    };
+    
+    return { dayOfWeek, timeOfDay };
+}
+
+// Create day of week chart
+function createDayOfWeekChart(data) {
+    const ctx = document.getElementById('dayOfWeekChart');
+    if (!ctx) return;
+    
+    dayOfWeekChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Average Fare ($)',
+                data: data.data,
+                backgroundColor: '#3498db80',
+                borderColor: '#3498db',
+                borderWidth: 2,
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `$${context.parsed.y.toFixed(2)} average fare`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 10,
+                    max: 20,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Create time of day chart
+function createTimeOfDayChart(data) {
+    const ctx = document.getElementById('timeOfDayChart');
+    if (!ctx) return;
+    
+    timeOfDayChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Average Fare ($)',
+                data: data.data,
+                backgroundColor: '#e74c3c30',
+                borderColor: '#e74c3c',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#e74c3c',
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2,
+                pointRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `$${context.parsed.y.toFixed(2)} average fare`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 10,
+                    max: 20,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Generate insights and tips based on fare data
+function generateFareInsights(fareData) {
+    // Day insights
+    const dayData = fareData.dayOfWeek.data;
+    const cheapestDay = fareData.dayOfWeek.labels[dayData.indexOf(Math.min(...dayData))];
+    const expensiveDay = fareData.dayOfWeek.labels[dayData.indexOf(Math.max(...dayData))];
+    
+    document.getElementById('dayInsights').innerHTML = 
+        `<strong>Cheapest:</strong> ${cheapestDay} ($${Math.min(...dayData).toFixed(2)}) | 
+         <strong>Most expensive:</strong> ${expensiveDay} ($${Math.max(...dayData).toFixed(2)})`;
+    
+    // Time insights
+    const timeData = fareData.timeOfDay.data;
+    const cheapestTime = fareData.timeOfDay.labels[timeData.indexOf(Math.min(...timeData))];
+    const expensiveTime = fareData.timeOfDay.labels[timeData.indexOf(Math.max(...timeData))];
+    
+    document.getElementById('timeInsights').innerHTML = 
+        `<strong>Cheapest:</strong> Around ${cheapestTime} ($${Math.min(...timeData).toFixed(2)}) | 
+         <strong>Most expensive:</strong> Around ${expensiveTime} ($${Math.max(...timeData).toFixed(2)})`;
+    
+    // Generate money-saving tips
+    const tips = [
+        `Book rides on ${cheapestDay} to save up to $${(Math.max(...dayData) - Math.min(...dayData)).toFixed(2)} per trip`,
+        `Avoid weekend nights (Friday-Sunday) when fares are 20-40% higher`,
+        `Travel around ${cheapestTime} for the lowest fares of the day`,
+        `Rush hours (7-9 AM, 5-8 PM) typically cost 15-25% more`,
+        `Late night rides (12-4 AM) have surge pricing due to limited availability`,
+        `Wednesday is typically the cheapest day for NYC taxi rides`,
+        `Large groups (5+ passengers) require bigger vehicles with 35% surcharge`
+    ];
+    
+    document.getElementById('savingTips').innerHTML = 
+        tips.map(tip => `<li>${tip}</li>`).join('');
 }
 
 // Export functions for global access

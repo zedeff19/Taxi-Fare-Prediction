@@ -28,7 +28,7 @@ def quick_test():
     trip_data = {
         "PULocationID": 161,
         "DOLocationID": 230,
-        "passenger_count": 2,
+        "passenger_count": 10,
         "trip_distance": 5.5,
         "pickup_hour": 14,
         "pickup_day": "Friday"

@@ -254,6 +254,18 @@ def predict_fare():
         # Make prediction
         predicted_fare = make_prediction(features_array)
         
+        # Apply passenger count multiplier (model was trained only on passenger_count=1)
+        passenger_count = data.get('passenger_count', 1)
+        if passenger_count >= 5:
+            passenger_multiplier = 1.35  # 35% increase for 5+ passengers
+        elif passenger_count >= 3:
+            passenger_multiplier = 1.12  # 12% increase for 3-4 passengers
+        else:
+            passenger_multiplier = 1.0   # No change for 1-2 passengers
+        
+        predicted_fare = predicted_fare * passenger_multiplier
+        logger.info(f"Applied passenger multiplier {passenger_multiplier}x for {passenger_count} passengers")
+        
         # Ensure prediction is reasonable (basic validation)
         if predicted_fare < 0:
             predicted_fare = abs(predicted_fare)
@@ -364,6 +376,17 @@ def predict_fare_from_locations():
         # Preprocess and predict
         features_array = preprocess_input(trip_features)
         predicted_fare = make_prediction(features_array)
+        
+        # Apply passenger count multiplier (model was trained only on passenger_count=1)
+        if passenger_count >= 5:
+            passenger_multiplier = 1.35  # 35% increase for 5+ passengers
+        elif passenger_count >= 3:
+            passenger_multiplier = 1.12  # 12% increase for 3-4 passengers
+        else:
+            passenger_multiplier = 1.0   # No change for 1-2 passengers
+        
+        predicted_fare = predicted_fare * passenger_multiplier
+        logger.info(f"Applied passenger multiplier {passenger_multiplier}x for {passenger_count} passengers")
         
         # Ensure prediction is reasonable
         if predicted_fare < 0:

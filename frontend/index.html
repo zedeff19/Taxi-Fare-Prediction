@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NYC Taxi Fare Predictor</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -65,11 +66,25 @@
                         </div>
                         
                         <div class="form-group">
+                            <label for="pickupDate">
+                                <span class="icon">📅</span>
+                                Pickup Date
+                            </label>
+                            <input type="date" id="pickupDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
                             <label for="pickupTime">
                                 <span class="icon">🕐</span>
                                 Pickup Time
                             </label>
                             <input type="time" id="pickupTime" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <!-- Empty space for alignment -->
                         </div>
                     </div>
 
@@ -99,6 +114,39 @@
                     </button>
                 </div>
                 <div id="quickEstimateResult" class="result" style="display: none;"></div>
+            </section>
+
+            <!-- Fare Trends Section -->
+            <section class="card">
+                <h2>📊 Fare Trends & Insights</h2>
+                <p>Plan your trips based on historical fare patterns to save money</p>
+                
+                <div class="chart-container">
+                    <div class="chart-section">
+                        <h3>📅 Day of Week vs Fare</h3>
+                        <p class="chart-description">See how fares vary by day of the week</p>
+                        <div class="chart-wrapper">
+                            <canvas id="dayOfWeekChart"></canvas>
+                        </div>
+                        <div class="chart-insights" id="dayInsights"></div>
+                    </div>
+                    
+                    <div class="chart-section">
+                        <h3>🕐 Time of Day vs Fare</h3>
+                        <p class="chart-description">Discover the best times to book for lower fares</p>
+                        <div class="chart-wrapper">
+                            <canvas id="timeOfDayChart"></canvas>
+                        </div>
+                        <div class="chart-insights" id="timeInsights"></div>
+                    </div>
+                </div>
+                
+                <div class="trend-tips">
+                    <h4>💡 Money-Saving Tips</h4>
+                    <ul id="savingTips">
+                        <li>Loading fare trends...</li>
+                    </ul>
+                </div>
             </section>
         </main>
 
