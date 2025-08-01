@@ -182,6 +182,38 @@ function validateForm() {
         }
     });
     
+    // Additional validation: Check if pickup and dropoff are the same
+    const pickupLocation = document.getElementById('pickupLocation');
+    const dropoffLocation = document.getElementById('dropoffLocation');
+    
+    if (pickupLocation && dropoffLocation && 
+        pickupLocation.value && dropoffLocation.value && 
+        pickupLocation.value === dropoffLocation.value) {
+        isValid = false;
+        
+        // Show a visual indication that locations are the same
+        if (!document.getElementById('sameLocationWarning')) {
+            const warningDiv = document.createElement('div');
+            warningDiv.id = 'sameLocationWarning';
+            warningDiv.style.color = '#e74c3c';
+            warningDiv.style.fontSize = '14px';
+            warningDiv.style.marginTop = '10px';
+            warningDiv.style.padding = '8px';
+            warningDiv.style.backgroundColor = '#ffeaa7';
+            warningDiv.style.border = '1px solid #fdcb6e';
+            warningDiv.style.borderRadius = '4px';
+            warningDiv.innerHTML = '⚠️ Pickup and dropoff locations must be different';
+            
+            dropoffLocation.parentElement.appendChild(warningDiv);
+        }
+    } else {
+        // Remove warning if locations are different
+        const existingWarning = document.getElementById('sameLocationWarning');
+        if (existingWarning) {
+            existingWarning.remove();
+        }
+    }
+    
     submitBtn.disabled = !isValid;
     submitBtn.style.opacity = isValid ? '1' : '0.6';
 }
@@ -302,6 +334,11 @@ async function predictFare(event) {
         // Validate required fields
         if (!formData.pickup_location_id || !formData.dropoff_location_id) {
             throw new Error('Please select both pickup and dropoff locations');
+        }
+        
+        // Check if pickup and dropoff locations are the same
+        if (formData.pickup_location_id === formData.dropoff_location_id) {
+            throw new Error('Pickup and dropoff locations cannot be the same. Please select different locations for your trip.');
         }
         
         // Try to get real distance from Google Maps
@@ -515,19 +552,6 @@ function displaySuccessResult(data, formData, realDistance = null) {
             <p><strong>Day of Week:</strong> ${formData.pickup_day} ${isFuture ? '(affects pricing)' : ''}</p>
         </div>
         
-        <div class="trip-summary">
-            <h4>💰 Fare Breakdown</h4>
-            <p><strong>Base Fare:</strong> $${data.base_fare || data.predicted_fare}</p>
-            ${data.passenger_multiplier && data.passenger_multiplier > 1 ? 
-                `<p><strong>Passenger Surcharge:</strong> +${((data.passenger_multiplier - 1) * 100).toFixed(0)}% ${data.passenger_note || ''}</p>` : 
-                ''}
-            <p><strong>Taxes & Fees:</strong> Included in estimate</p>
-            <p><strong>Total (excl. tip):</strong> <span style="font-weight: bold; color: #2ecc71;">$${data.predicted_fare}</span></p>
-            ${data.passenger_multiplier && data.passenger_multiplier > 1 ? 
-                `<p style="color: #7f8c8d; font-size: 0.9em;"><em>Large groups (${formData.passenger_count}+ passengers) typically require larger vehicles</em></p>` : 
-                ''}
-        </div>
-        
         <p><small>💡 <strong>Tip:</strong> Consider adding 18-20% gratuity for your driver</small></p>
         <p><small>📊 Estimate considers day of week and time for accurate pricing</small></p>
         ${isFuture ? '<p><small>🔮 <strong>Future Booking:</strong> Prices may vary based on actual demand and traffic</small></p>' : ''}
@@ -539,13 +563,32 @@ function displaySuccessResult(data, formData, realDistance = null) {
 function displayErrorResult(errorMessage) {
     const resultDiv = document.getElementById('predictionResult');
     
-    resultDiv.className = 'result error';
-    resultDiv.innerHTML = `
-        <h3>❌ Prediction Failed</h3>
-        <p><strong>Error:</strong> ${errorMessage}</p>
-        <p>Please check your inputs and try again.</p>
-        <p>If the problem persists, ensure the API server is running.</p>
-    `;
+    // Check if it's the same location error for special handling
+    if (errorMessage.includes('cannot be the same')) {
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `
+            <h3>⚠️ Same Location Selected</h3>
+            <p><strong>Issue:</strong> Pickup and dropoff locations are identical</p>
+            <p>Please select different locations to get a valid fare estimate.</p>
+            <div style="margin-top: 15px; padding: 10px; background-color: #e8f4fd; border-left: 4px solid #3498db; border-radius: 4px;">
+                <p><strong>💡 Did you know?</strong></p>
+                <ul style="margin: 5px 0; padding-left: 20px;">
+                    <li>NYC taxis have a minimum fare even for very short trips</li>
+                    <li>If you need to wait at the same location, consider asking the driver to wait</li>
+                    <li>For pickups at the same building, try selecting a nearby location</li>
+                </ul>
+            </div>
+        `;
+    } else {
+        // Regular error display
+        resultDiv.className = 'result error';
+        resultDiv.innerHTML = `
+            <h3>❌ Prediction Failed</h3>
+            <p><strong>Error:</strong> ${errorMessage}</p>
+            <p>Please check your inputs and try again.</p>
+            <p>If the problem persists, ensure the API server is running.</p>
+        `;
+    }
 }
 
 // Quick estimate function
@@ -562,6 +605,18 @@ async function quickEstimate(fromLocation, toLocation) {
         
         if (!pickup || !dropoff) {
             throw new Error(`Could not find locations for ${fromLocation} or ${toLocation}`);
+        }
+        
+        // Check if pickup and dropoff are the same
+        if (pickup.id === dropoff.id) {
+            resultDiv.className = 'result error';
+            resultDiv.innerHTML = `
+                <h3>⚠️ Same Location Selected</h3>
+                <p>Both pickup and dropoff are set to: <strong>${pickup.name}</strong></p>
+                <p>Please select different locations for a valid trip estimate.</p>
+                <p><small>💡 Tip: NYC taxi minimum fare applies even for very short trips</small></p>
+            `;
+            return;
         }
         
         // Use current time as default
@@ -857,19 +912,29 @@ function generateFareInsights(fareData) {
         `<strong>Cheapest:</strong> Around ${cheapestTime} ($${Math.min(...timeData).toFixed(2)}) | 
          <strong>Most expensive:</strong> Around ${expensiveTime} ($${Math.max(...timeData).toFixed(2)})`;
     
-    // Generate money-saving tips
-    const tips = [
+    // Generate all possible money-saving tips
+    const allTips = [
         `Book rides on ${cheapestDay} to save up to $${(Math.max(...dayData) - Math.min(...dayData)).toFixed(2)} per trip`,
         `Avoid weekend nights (Friday-Sunday) when fares are 20-40% higher`,
         `Travel around ${cheapestTime} for the lowest fares of the day`,
         `Rush hours (7-9 AM, 5-8 PM) typically cost 15-25% more`,
         `Late night rides (12-4 AM) have surge pricing due to limited availability`,
         `Wednesday is typically the cheapest day for NYC taxi rides`,
-        `Large groups (5+ passengers) require bigger vehicles with 35% surcharge`
+        `Large groups (5+ passengers) require bigger vehicles with 35% surcharge`,
+        `Pre-book your rides during peak hours to avoid surge pricing`,
+        `Consider walking short distances (under 0.5 miles) to save on minimum fare`,
+        `Airport trips during off-peak hours can save you 20-30%`,
+        `Sharing rides with apps can reduce costs for longer trips`,
+        `Bad weather increases demand - plan accordingly or use public transport`
     ];
     
+    // Randomly select 3-4 tips
+    const numTips = Math.random() > 0.5 ? 3 : 4;
+    const shuffledTips = [...allTips].sort(() => Math.random() - 0.5);
+    const selectedTips = shuffledTips.slice(0, numTips);
+    
     document.getElementById('savingTips').innerHTML = 
-        tips.map(tip => `<li>${tip}</li>`).join('');
+        selectedTips.map(tip => `<li>${tip}</li>`).join('');
 }
 
 // Export functions for global access
